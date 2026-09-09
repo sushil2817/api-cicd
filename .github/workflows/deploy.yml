@@ -3,7 +3,7 @@ name: Deploy NodeJS Application on server
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   deploy:
@@ -11,15 +11,15 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Deploy Via SSH
-        uses: appleboy/ssh-action@v1.0.3
+        uses: appleboy/ssh-action@v1.2.5
         with:
           host: ${{ secrets.SSH_HOST }}
           username: root
           key: ${{ secrets.SSH_KEY }}
           script: |
             cd /root/Apps/api-cicd
-            git pull 
+            git pull
             docker compose up -d --build
